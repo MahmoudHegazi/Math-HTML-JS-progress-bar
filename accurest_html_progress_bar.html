@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("p:not(.intro)").css("background-color", "yellow");
+});
+</script>
+</head>
+<body>
+
+            <div class="container" style="width: 100%;background-color: #ddd;color:black !important;">
+                <div id="categories_blancer_bar" 
+                style="width: 0%; background-color: #04AA6D; text-align: right;padding-top: 10px;padding-bottom: 10px;color: black;"
+                title="Generated Templates Precentage">0%</div>
+           </div>
+
+
+<script>
+
+function updateMathSkillBar(stepsDone=0, maxSteps=0, selector='#categories_blancer_bar'){
+
+    if (!selector || !$(selector).length){
+        console.warn("Please Provide range selector");
+        return false;
+    }
+
+    if (
+        isNaN(parseInt(stepsDone)) || isNaN(parseInt(maxSteps)) ||
+        typeof(parseInt(stepsDone)) !== 'number' || typeof(parseInt(maxSteps)) !== 'number') {
+
+        if (typeof(selector) !== 'undefined' && $(selector).length) {
+            $(selector).css("width", "0%");
+            $(selector).text("0%");
+        }
+        console.warn("Please Provide valid numbers totalSteps and maxSteps");
+        return false;
+    }
+    if (stepsDone > maxSteps) {
+        console.warn("total steps can not be more than max steps");
+        return false;
+    }
+    
+    
+    let toFixedInt = 1;    
+    if (maxSteps > 0) {
+        let precentage = parseFloat(stepsDone) / parseInt(maxSteps) * 100;
+        
+        precentage = 0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000012111;
+        // small num, handle divide on zero case eg 99.99982107327408 toFixed(1) == 100 fix this (this function can accurate until number.toFixed(99)
+        alert((precentage).toFixed(toFixedInt) == 0);
+        if ((precentage).toFixed(toFixedInt) == parseFloat(0)){           
+           let oldSmallNum = parseFloat(precentage).toFixed(toFixedInt);
+           try {              
+              for (let i=2; i<100; i++){
+                 toFixedInt += 1;
+                 oldSmallNum = parseFloat(parseFloat(oldSmallNum).toFixed(toFixedInt));
+                 if (oldSmallNum == parseFloat(0)){                        
+                        oldSmallNum = parseFloat(precentage).toFixed(toFixedInt);
+                                console.log('repeat old', parseFloat(oldSmallNum), parseFloat(0), 'to fixed:',toFixedInt );
+                   
+                 } 
+                 
+                 if (oldSmallNum != parseFloat(0)){  
+                    precentage = parseFloat(oldSmallNum);
+                    console.log("fixed at to Fixed"+toFixedInt," number:", precentage);
+                    break;
+                 }
+                 
+              }           
+           } catch (error){
+              console.log("unknown error invalid numbers used", error);
+           }
+
+        }
+        
+        
+
+        if (precentage == 1){
+        }
+        //alert(precentage);
+        //alert(precentage.toFixed(1));
+        /*
+        precentage = (parseFloat(precentage) === precentage) ? (precentage).toFixed(1) : precentage;
+        console.log(precentage);
+        */
+        
+        // fixed calc result
+        if (parseFloat(precentage) == parseInt(precentage)) {
+
+            precentage = Math.round(precentage);
+        }
+        $(selector).css('width', `${precentage}%`);
+        $(selector).text(`${precentage}%`);
+    } else {
+        $(selector).css('width', '0%');
+        $(selector).text('0%');
+        console.warn("divde buy zero handle");
+    }
+}
+//smallonly
+updateMathSkillBar(stepsDone=55184849854445-1000000, maxSteps=55184849854445);
+</script>
+
+</body>
+</html>
